@@ -42,5 +42,17 @@ describe('Firestarter', () => {
     cy.contains('Logout').click();
   })
 
+  it('should allowe the user to make notes', () => {
+    cy.login(email, password);
+
+    cy.get('#navToggle').click();
+    cy.contains('Firestore').click();
+
+    const noteText = chance.sentence({words: 5});
+    const noteList = cy.get('main');
+
+    cy.
+  })
+
 
 })
