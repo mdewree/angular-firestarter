@@ -5,7 +5,7 @@ const chance = new Chance();
 
 describe('Firestarter', () => {
   const email = chance.email();
-  const password = ValidPassword123;
+  const password = 'ValidPassword123';
 
   beforeEach(() => {
     cy.visit('http://localhost:4200');
@@ -27,6 +27,8 @@ describe('Firestarter', () => {
   })
 
   it('should sign up a new user', () => {
+    cy.pause();
+
     cy.get('#navToggle').click();
     cy.contains('Login').click();
 
