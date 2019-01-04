@@ -1,4 +1,4 @@
-<reference types="cypress" />
+/// <reference types="cypress" />
 
 import Chance from 'chance';
 const chance = new Chance();
@@ -8,15 +8,13 @@ describe('Firestarter', () => {
   const password = ValidPassword123;
 
   beforeEach(() => {
-    cy.visit('http://localhost/4200');
+    cy.visit('http://localhost:4200');
   })
 
-  // FIRST EZ TEST
   it('should have a title', () => {
     cy.contains('Welcome to Firestarter');
   })
 
-  // LITTLE MORE DIFFICULT SECOND TEST
   it('should block protected routes', () => {
     cy.pause();
 
@@ -27,4 +25,20 @@ describe('Firestarter', () => {
       .should('contain', 'You must be logged in!')
       .and('be.visible');
   })
+
+  it('should sign up a new user', () => {
+    cy.get('#navToggle').click();
+    cy.contains('Login').click();
+
+    cy.url().should('include', 'login');
+
+    cy.get('input[name=email]').type(email);
+    cy.get('input[name=password]').type(password);
+    cy.get('button[type=submit]').click();
+
+    cy.contains('Welcome new user!');
+    cy.contains('Logout').click();
+  })
+
+
 })
